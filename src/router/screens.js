@@ -13,6 +13,11 @@ export const SignUpScreen = createStackNavigator({
     Registration: {
         screen: Registration
     },
+}, {
+    headerMode: 'none',
+    navigationOptions: {
+        headerVisible: false,
+    }
 });
 
 export const MainScreen = createStackNavigator({

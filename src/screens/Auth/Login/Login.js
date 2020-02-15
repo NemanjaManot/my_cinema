@@ -1,12 +1,14 @@
 import React, { useState } from "react";
-import { View, ScrollView, TouchableOpacity } from "react-native";
+import { View, TouchableOpacity, Image, KeyboardAvoidingView } from "react-native";
 import { Button, TextInput, HelperText, Text } from "react-native-paper";
 /* Styles */
 import { styles } from "../authStyle";
+/* Images */
+import { logoImage } from "../../../assets/images";
 /* Services */
 import AsyncStorageService from "../../../services/asyncStorageService";
 
-const { textInputStyle, loginButton, inputStyle, container, registerButtonContainer } = styles;
+const { textInputStyle, loginButton, inputStyle, container, registerButtonContainer, imageWrapper } = styles;
 
 const Login = ({ navigation }) => {
     const [email, setEmail] = useState('');
@@ -31,7 +33,10 @@ const Login = ({ navigation }) => {
     };
 
     return (
-        <ScrollView contentContainerStyle={ container }>
+        <KeyboardAvoidingView style={ container } behavior="padding" enabled>
+            <View style={ imageWrapper }>
+                <Image source={ logoImage }/>
+            </View>
             <View style={ inputStyle }>
                 <TextInput
                     label="Email"
@@ -52,6 +57,10 @@ const Login = ({ navigation }) => {
                 />
             </View>
 
+            <HelperText type="error" visible={ error }>
+                Something went wrong, try again
+            </HelperText>
+
             <Button
                 contentStyle={ loginButton }
                 mode="contained"
@@ -62,20 +71,11 @@ const Login = ({ navigation }) => {
 
             <View style={ registerButtonContainer }>
                 <Text>Don't have account?</Text>
-                <TouchableOpacity
-                    onPress={ navigateToRegister }
-                >
+                <TouchableOpacity onPress={ navigateToRegister }>
                     <Text>Register here</Text>
                 </TouchableOpacity>
             </View>
-
-            <HelperText
-                type="error"
-                visible={ error }
-            >
-                Something went wrong, try again
-            </HelperText>
-        </ScrollView>
+        </KeyboardAvoidingView>
     )
 };
 

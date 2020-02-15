@@ -16,8 +16,15 @@ export const styles = StyleSheet.create({
         marginBottom: 15
     },
     registerButtonContainer: {
-        paddingTop: 15,
+        paddingTop: 35,
         justifyContent: 'center',
+        alignItems: 'center'
+    },
+    backToLoginStyle: {
+        paddingHorizontal: '10%',
+        marginTop: 50
+    },
+    imageWrapper: {
         alignItems: 'center'
     }
 });

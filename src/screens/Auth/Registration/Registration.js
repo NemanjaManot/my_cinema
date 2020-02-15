@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { View, ScrollView } from "react-native";
-import { Button, TextInput } from "react-native-paper";
+import { View, KeyboardAvoidingView, TouchableOpacity } from "react-native";
+import { Button, TextInput, Text } from "react-native-paper";
+import MaterialIcon from "react-native-vector-icons/MaterialIcons";
 /* Styles */
 import { styles } from "../authStyle";
 /* Services */
 import AsyncStorageService from "../../../services/asyncStorageService";
 
-const { textInputStyle, loginButton, inputStyle, container } = styles;
+const { textInputStyle, loginButton, inputStyle, container, backToLoginStyle } = styles;
 
 const Registration = ({ navigation }) => {
     const [registeredUsers, setRegisteredUsers] = useState([]);
@@ -39,44 +40,52 @@ const Registration = ({ navigation }) => {
         await navigation.navigate("Login")
     };
 
+    const backToLogin = () => navigation.navigate("Login");
+
     return (
-        <ScrollView contentContainerStyle={ container }>
-            <View style={ inputStyle }>
-                <TextInput
-                    label="Set Full Name"
-                    value={ fullName }
-                    onChangeText={ onChangeFullName }
-                    autoCapitalize="none"
-                    style={ textInputStyle }
-                />
+        <KeyboardAvoidingView style={ { flex: 1 } } behavior="padding" enabled>
+            <TouchableOpacity style={ backToLoginStyle } onPress={ backToLogin }>
+                <MaterialIcon name="arrow-back" size={ 40 }/>
+            </TouchableOpacity>
+
+            <View style={ container }>
+                <View style={ inputStyle }>
+                    <TextInput
+                        label="Set Full Name"
+                        value={ fullName }
+                        onChangeText={ onChangeFullName }
+                        autoCapitalize="none"
+                        style={ textInputStyle }
+                    />
+                </View>
+                <View style={ inputStyle }>
+                    <TextInput
+                        label="Set Email"
+                        value={ email }
+                        onChangeText={ onChangeEmail }
+                        autoCapitalize="none"
+                        style={ textInputStyle }
+                    />
+                </View>
+                <View style={ inputStyle }>
+                    <TextInput
+                        label="Set Password"
+                        value={ password }
+                        onChangeText={ onChangePassword }
+                        secureTextEntry
+                        autoCapitalize="none"
+                        style={ textInputStyle }
+                    />
+                </View>
+                <Button
+                    contentStyle={ loginButton }
+                    mode="contained"
+                    onPress={ onSubmit }
+                >
+                    Register
+                </Button>
             </View>
-            <View style={ inputStyle }>
-                <TextInput
-                    label="Set Email"
-                    value={ email }
-                    onChangeText={ onChangeEmail }
-                    autoCapitalize="none"
-                    style={ textInputStyle }
-                />
-            </View>
-            <View style={ inputStyle }>
-                <TextInput
-                    label="Set Password"
-                    value={ password }
-                    onChangeText={ onChangePassword }
-                    secureTextEntry
-                    autoCapitalize="none"
-                    style={ textInputStyle }
-                />
-            </View>
-            <Button
-                contentStyle={ loginButton }
-                mode="contained"
-                onPress={ onSubmit }
-            >
-                Register
-            </Button>
-        </ScrollView>
+        </KeyboardAvoidingView>
     )
 };
 
