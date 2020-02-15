@@ -13,15 +13,6 @@ const Login = ({ navigation }) => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState(false);
 
-    useEffect(() => {
-        return () => {
-            console.log("cleaned up");
-            setError(false);
-            setPassword('');
-            setEmail('');
-        };
-    }, []);
-
     const navigateToRegister = () => navigation.navigate("Registration");
     const onChangeEmail = email => setEmail(email);
     const onChangePassword = password => setPassword(password);
@@ -32,9 +23,10 @@ const Login = ({ navigation }) => {
             return registeredUser.email === email && registeredUser.password === password
         });
         if (user) {
-            navigation.navigate("App");
+            await AsyncStorageService.setLoggedUser(user);
+            await navigation.navigate("App");
         } else {
-            setError(true);
+            await setError(true);
         }
     };
 

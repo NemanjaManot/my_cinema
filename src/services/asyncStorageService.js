@@ -32,10 +32,29 @@ class AsyncStorageService {
         }
     }
 
+    async setLoggedUser(user) {
+        try {
+            await AsyncStorage.setItem('logged_user', JSON.stringify(user));
+        } catch (error) {
+            return error;
+        }
+    };
+
+    async logoutUser() {
+        try {
+            await AsyncStorage.removeItem('logged_user')
+        } catch (error) {
+            return error;
+        }
+    };
+
+    async getLoggedUser() {
+        return await this.getItem('logged_user');
+    }
+
     async getRegisteredUsers() {
         return await this.getItem('registered_users');
     }
-
 }
 
 export default new AsyncStorageService();

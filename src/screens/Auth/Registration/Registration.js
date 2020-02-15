@@ -4,7 +4,7 @@ import { Button, TextInput } from "react-native-paper";
 /* Styles */
 import { styles } from "../authStyle";
 /* Services */
-import AsyncStorageService from '../../../services/asyncStorageService';
+import AsyncStorageService from "../../../services/asyncStorageService";
 
 const { textInputStyle, loginButton, inputStyle } = styles;
 
