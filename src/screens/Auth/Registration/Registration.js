@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { View, KeyboardAvoidingView, TouchableOpacity } from "react-native";
-import { Button, TextInput, Text } from "react-native-paper";
+import { Button, TextInput, HelperText } from "react-native-paper";
 import MaterialIcon from "react-native-vector-icons/MaterialIcons";
 /* Styles */
 import { styles } from "../authStyle";
 /* Services */
 import AsyncStorageService from "../../../services/asyncStorageService";
+/* Regex */
+import { EMAIL_VALIDATION_REGEX } from "../../../utils/regex";
 
 const { textInputStyle, loginButton, inputStyle, container, backToLoginStyle } = styles;
 
@@ -14,6 +16,7 @@ const Registration = ({ navigation }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [fullName, setFullName] = useState('');
+    const [error, setError] = useState(false);
 
     const onChangeEmail = email => setEmail(email);
     const onChangePassword = password => setPassword(password);
@@ -30,14 +33,24 @@ const Registration = ({ navigation }) => {
     };
 
     const onSubmit = async () => {
-        const registrationParams = {
-            fullName,
-            email,
-            password
-        };
+        const emailValidation = EMAIL_VALIDATION_REGEX.test(email);
+        const passwordValidation = password.length > 2;
 
-        await AsyncStorageService.setNewUser(registrationParams, registeredUsers);
-        await navigation.navigate("Login")
+        if (email === '' || password === '' || fullName === '') {
+            setError(true);
+        } else if (!emailValidation || !passwordValidation) {
+            setError(true);
+        } else {
+            setError(false);
+            const registrationParams = {
+                fullName,
+                email,
+                password
+            };
+
+            await AsyncStorageService.setNewUser(registrationParams, registeredUsers);
+            await navigation.navigate("Login")
+        }
     };
 
     const backToLogin = () => navigation.navigate("Login");
@@ -77,6 +90,9 @@ const Registration = ({ navigation }) => {
                         style={ textInputStyle }
                     />
                 </View>
+                <HelperText style={ { marginVertical: 10 } } type="error" visible={ error }>
+                    Something went wrong, try again
+                </HelperText>
                 <Button
                     contentStyle={ loginButton }
                     mode="contained"
