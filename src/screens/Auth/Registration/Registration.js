@@ -36,7 +36,7 @@ const Registration = ({ navigation }) => {
         };
 
         await AsyncStorageService.setNewUser(registrationParams, registeredUsers);
-        navigation.navigate("Login")
+        await navigation.navigate("Login")
     };
 
     return (
@@ -44,7 +44,7 @@ const Registration = ({ navigation }) => {
             <>
                 <View style={ inputStyle }>
                     <TextInput
-                        label="Full Name"
+                        label="Set Full Name"
                         value={ fullName }
                         onChangeText={ onChangeFullName }
                         autoCapitalize="none"
@@ -53,7 +53,7 @@ const Registration = ({ navigation }) => {
                 </View>
                 <View style={ inputStyle }>
                     <TextInput
-                        label="Email"
+                        label="Set Email"
                         value={ email }
                         onChangeText={ onChangeEmail }
                         autoCapitalize="none"
@@ -62,7 +62,7 @@ const Registration = ({ navigation }) => {
                 </View>
                 <View style={ inputStyle }>
                     <TextInput
-                        label="Password"
+                        label="Set Password"
                         value={ password }
                         onChangeText={ onChangePassword }
                         secureTextEntry
