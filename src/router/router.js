@@ -1,6 +1,7 @@
 import { createSwitchNavigator, createAppContainer } from "react-navigation";
 /* Stack navigator screens */
 import { SignUpScreen, MainScreen } from "./screens";
+import InitialLoading from "../screens/InitialLoading/InitialLoading";
 
 const Navigator = createSwitchNavigator(
     {
@@ -12,6 +13,7 @@ const Navigator = createSwitchNavigator(
 
 const Router = createAppContainer(
     createSwitchNavigator({
+        Initial: InitialLoading,
         Login: SignUpScreen,
         App: Navigator
     })
