@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { View } from "react-native";
+import { View, ScrollView } from "react-native";
 import { Button, TextInput } from "react-native-paper";
 /* Styles */
 import { styles } from "../authStyle";
 /* Services */
 import AsyncStorageService from "../../../services/asyncStorageService";
 
-const { textInputStyle, loginButton, inputStyle } = styles;
+const { textInputStyle, loginButton, inputStyle, container } = styles;
 
 const Registration = ({ navigation }) => {
     const [registeredUsers, setRegisteredUsers] = useState([]);
@@ -40,47 +40,43 @@ const Registration = ({ navigation }) => {
     };
 
     return (
-        <View style={ { flex: 1 } }>
-            <>
-                <View style={ inputStyle }>
-                    <TextInput
-                        label="Set Full Name"
-                        value={ fullName }
-                        onChangeText={ onChangeFullName }
-                        autoCapitalize="none"
-                        style={ textInputStyle }
-                    />
-                </View>
-                <View style={ inputStyle }>
-                    <TextInput
-                        label="Set Email"
-                        value={ email }
-                        onChangeText={ onChangeEmail }
-                        autoCapitalize="none"
-                        style={ textInputStyle }
-                    />
-                </View>
-                <View style={ inputStyle }>
-                    <TextInput
-                        label="Set Password"
-                        value={ password }
-                        onChangeText={ onChangePassword }
-                        secureTextEntry
-                        autoCapitalize="none"
-                        style={ textInputStyle }
-                    />
-                </View>
-            </>
-            <>
-                <Button
-                    contentStyle={ loginButton }
-                    mode="contained"
-                    onPress={ onSubmit }
-                >
-                    Register
-                </Button>
-            </>
-        </View>
+        <ScrollView contentContainerStyle={ container }>
+            <View style={ inputStyle }>
+                <TextInput
+                    label="Set Full Name"
+                    value={ fullName }
+                    onChangeText={ onChangeFullName }
+                    autoCapitalize="none"
+                    style={ textInputStyle }
+                />
+            </View>
+            <View style={ inputStyle }>
+                <TextInput
+                    label="Set Email"
+                    value={ email }
+                    onChangeText={ onChangeEmail }
+                    autoCapitalize="none"
+                    style={ textInputStyle }
+                />
+            </View>
+            <View style={ inputStyle }>
+                <TextInput
+                    label="Set Password"
+                    value={ password }
+                    onChangeText={ onChangePassword }
+                    secureTextEntry
+                    autoCapitalize="none"
+                    style={ textInputStyle }
+                />
+            </View>
+            <Button
+                contentStyle={ loginButton }
+                mode="contained"
+                onPress={ onSubmit }
+            >
+                Register
+            </Button>
+        </ScrollView>
     )
 };
 
