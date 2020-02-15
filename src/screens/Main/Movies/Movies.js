@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
-import { ScrollView, Button as RNButton, Image } from "react-native";
+import React, { useEffect, useState } from "react";
+import { ScrollView, Button as RNButton, Image, View } from "react-native";
 import { toJS } from "mobx";
 import { observer, inject } from "mobx-react";
-import { Card } from "react-native-paper";
+import { Card, Button } from "react-native-paper";
 
 const Movies = ({ navigation, MovieStore }) => {
+    const [isNowPlaying, setIsNowPlaying] = useState(true);
     useEffect(() => {
         MovieStore.getNowPlayingMovies();
     }, [MovieStore]);
@@ -33,8 +34,26 @@ const Movies = ({ navigation, MovieStore }) => {
         )
     };
 
+    const onNowPlayingPress = () => {
+        MovieStore.getNowPlayingMovies();
+        setIsNowPlaying(true)
+    };
+
+    const onUpcomingPress = () => {
+        MovieStore.getUpcomingMovies();
+        setIsNowPlaying(false)
+    };
+
     return (
         <ScrollView style={ { flex: 1 } }>
+            <View style={ { flexDirection: 'row', justifyContent: 'space-around' } }>
+                <Button mode={ isNowPlaying ? "contained" : "outlined" } onPress={ onNowPlayingPress }>
+                    Now playing
+                </Button>
+                <Button mode={ !isNowPlaying ? "contained" : "outlined" } onPress={ onUpcomingPress }>
+                    Upcoming
+                </Button>
+            </View>
             { movies.map(movie => renderMovie(movie)) }
         </ScrollView>
     )
