@@ -7,6 +7,8 @@ import { styles } from "../authStyle";
 import { logoImage } from "../../../assets/images";
 /* Services */
 import AsyncStorageService from "../../../services/asyncStorageService";
+/* Theme */
+import { theme } from "../../../assets/theme";
 
 const { textInputStyle, loginButton, inputStyle, container, registerButtonContainer, imageWrapper } = styles;
 
@@ -72,7 +74,7 @@ const Login = ({ navigation }) => {
             <View style={ registerButtonContainer }>
                 <Text>Don't have account?</Text>
                 <TouchableOpacity onPress={ navigateToRegister }>
-                    <Text>Register here</Text>
+                    <Text style={ { color: theme.colors.primary, fontWeight: 'bold' } }>Register here</Text>
                 </TouchableOpacity>
             </View>
         </KeyboardAvoidingView>

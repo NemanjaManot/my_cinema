@@ -1,8 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { ScrollView, Button as RNButton, Image, View } from "react-native";
+import { ScrollView, Image, View, TouchableOpacity } from "react-native";
 import { toJS } from "mobx";
 import { observer, inject } from "mobx-react";
 import { Card, Button } from "react-native-paper";
+import MaterialIcon from "react-native-vector-icons/MaterialIcons";
+/* Styles */
+import { styles } from "../mainStyle";
+/* Theme */
+import { theme } from "../../../assets/theme";
+
+const { profileHeaderStyle } = styles;
 
 const Movies = ({ navigation, MovieStore }) => {
     const [isNowPlaying, setIsNowPlaying] = useState(true);
@@ -61,11 +68,12 @@ const Movies = ({ navigation, MovieStore }) => {
 
 Movies.navigationOptions = ({ navigation }) => ({
     headerRight: () => (
-        <RNButton
+        <TouchableOpacity
+            style={ profileHeaderStyle }
             onPress={ () => navigation.navigate("UserProfile") }
-            title="Profile"
-            color="#fff"
-        />
+        >
+            <MaterialIcon name="person" size={ 25 } color={ theme.colors.primary }/>
+        </TouchableOpacity>
     )
 });
 

@@ -8,6 +8,8 @@ import { styles } from "../authStyle";
 import AsyncStorageService from "../../../services/asyncStorageService";
 /* Regex */
 import { EMAIL_VALIDATION_REGEX } from "../../../utils/regex";
+/* Theme */
+import { theme } from "../../../assets/theme";
 
 const { textInputStyle, loginButton, inputStyle, container, backToLoginStyle } = styles;
 
@@ -58,7 +60,7 @@ const Registration = ({ navigation }) => {
     return (
         <KeyboardAvoidingView style={ { flex: 1 } } behavior="padding" enabled>
             <TouchableOpacity style={ backToLoginStyle } onPress={ backToLogin }>
-                <MaterialIcon name="arrow-back" size={ 40 }/>
+                <MaterialIcon name="arrow-back" size={ 40 } color={ theme.colors.primary }/>
             </TouchableOpacity>
 
             <View style={ container }>
