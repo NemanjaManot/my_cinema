@@ -5,15 +5,17 @@ import { Subheading, Title } from "react-native-paper";
 import { theme } from "../../../assets/theme";
 /* Styles */
 import { styles } from "./moviesStyle";
+import { globalStyles } from "../../../assets/globalStyles";
 
 const { movieWrapper, contentMovieWrapper, imageStyle, itemFooter } = styles;
+const { shadow } = globalStyles;
 
 const MovieListItem = ({ item, onPress }) => {
     const { title, release_date, poster_path, vote_average } = item;
     const imageUri = `https://image.tmdb.org/t/p/w500/${ poster_path }`;
     return (
         <TouchableWithoutFeedback onPress={ onPress }>
-            <View style={ movieWrapper }>
+            <View style={ [movieWrapper, shadow] }>
                 <Image style={ imageStyle } source={ { uri: imageUri } }/>
                 <View style={ contentMovieWrapper }>
                     <View>

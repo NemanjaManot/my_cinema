@@ -7,15 +7,7 @@ export const styles = StyleSheet.create({
         flexDirection: 'row',
         flex: 1,
         margin: 10,
-        backgroundColor: theme.colors.background,
-        shadowColor: theme.colors.text,
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-        elevation: 5,
+        backgroundColor: theme.colors.background
     },
     contentMovieWrapper: {
         flex: 1,
