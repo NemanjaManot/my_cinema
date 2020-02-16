@@ -4,7 +4,7 @@ import { Button } from "react-native-paper";
 /* Services */
 import AsyncStorageService from "../../../services/asyncStorageService";
 /* Style */
-import { styles } from "../mainStyle";
+import { styles } from "./userProfileStyle";
 
 const { logoutButtonStyle } = styles;
 

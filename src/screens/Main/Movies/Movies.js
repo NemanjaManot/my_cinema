@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Image, View, TouchableOpacity, FlatList } from "react-native";
+import { TouchableOpacity, FlatList, View } from "react-native";
 import { toJS } from "mobx";
 import { observer, inject } from "mobx-react";
-import { Card, Button } from "react-native-paper";
+import { Button } from "react-native-paper";
 import MaterialIcon from "react-native-vector-icons/MaterialIcons";
 /* Components */
 import Loader from "../../../components/Loader/Loader";
+import MovieListItem from "./MovieListItem";
 /* Styles */
-import { styles } from "../mainStyle";
+import { styles } from "./moviesStyle";
 /* Theme */
 import { theme } from "../../../assets/theme";
 
@@ -21,26 +22,13 @@ const Movies = ({ navigation, MovieStore }) => {
 
     const { movies, isLoading } = toJS(MovieStore);
 
-    const onMoviePress = async (id) => {
+    const onMoviePress = async (id, title) => {
         await MovieStore.getSingleMovie(id);
-        await navigation.navigate("MovieSingle");
+        await navigation.navigate("MovieSingle", { title: title });
     };
 
     const renderItemMovie = ({ item }) => {
-        const { id, title, release_date, poster_path } = item;
-        const imageUri = `https://image.tmdb.org/t/p/w500/${ poster_path }`;
-        return (
-            <Card
-                key={ id }
-                onPress={ onMoviePress.bind(this, id) }
-            >
-                <Card.Title
-                    title={ title }
-                    subtitle={ release_date }
-                />
-                <Image style={ { height: 200, width: 150 } } source={ { uri: imageUri } }/>
-            </Card>
-        )
+        return <MovieListItem item={ item } onPress={ onMoviePress.bind(this, item.id, item.title) }/>;
     };
 
     const onNowPlayingPress = () => {
