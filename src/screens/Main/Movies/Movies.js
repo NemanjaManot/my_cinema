@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ScrollView, Image, View, TouchableOpacity } from "react-native";
+import { Image, View, TouchableOpacity, FlatList } from "react-native";
 import { toJS } from "mobx";
 import { observer, inject } from "mobx-react";
 import { Card, Button } from "react-native-paper";
@@ -24,8 +24,8 @@ const Movies = ({ navigation, MovieStore }) => {
         await navigation.navigate("MovieSingle");
     };
 
-    const renderMovie = (movie) => {
-        const { id, title, release_date, poster_path } = movie;
+    const renderItemMovie = ({ item }) => {
+        const { id, title, release_date, poster_path } = item;
         const imageUri = `https://image.tmdb.org/t/p/w500/${ poster_path }`;
         return (
             <Card
@@ -73,10 +73,14 @@ const Movies = ({ navigation, MovieStore }) => {
     };
 
     return (
-        <ScrollView bounces={ false } style={ { flex: 1 } }>
+        <View style={ { flex: 1 } }>
             { renderHeaderButtons() }
-            { movies.map(movie => renderMovie(movie)) }
-        </ScrollView>
+            { movies && <FlatList
+                data={ movies }
+                renderItem={ renderItemMovie }
+                keyExtractor={ (item, index) => index.toString() }
+            /> }
+        </View>
     )
 };
 
