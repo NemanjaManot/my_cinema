@@ -5,6 +5,8 @@ import Registration from "../screens/Auth/Registration/Registration";
 import Movies from "../screens/Main/Movies/Movies";
 import MovieSingle from "../screens/Main/MovieSingle/MovieSingle";
 import UserProfile from "../screens/Main/UserProfile/UserProfile";
+/* Theme */
+import { theme } from "../assets/theme";
 
 export const SignUpScreen = createStackNavigator({
     Login: {
@@ -13,6 +15,11 @@ export const SignUpScreen = createStackNavigator({
     Registration: {
         screen: Registration
     },
+}, {
+    headerMode: 'none',
+    navigationOptions: {
+        headerVisible: false,
+    }
 });
 
 export const MainScreen = createStackNavigator({
@@ -21,18 +28,18 @@ export const MainScreen = createStackNavigator({
         navigationOptions: () => ({
             title: 'Movies',
             headerStyle: {
-                backgroundColor: 'gray'
+                backgroundColor: theme.colors.background
             },
-            headerTintColor: 'blue'
+            headerTintColor: theme.colors.primary
         })
     },
     MovieSingle: {
         screen: MovieSingle,
         navigationOptions: () => ({
             headerStyle: {
-                backgroundColor: 'gray'
+                backgroundColor: theme.colors.background
             },
-            headerTintColor: 'blue'
+            headerTintColor: theme.colors.primary
         })
     },
     UserProfile: {
@@ -40,9 +47,13 @@ export const MainScreen = createStackNavigator({
         navigationOptions: () => ({
             title: 'User Profile',
             headerStyle: {
-                backgroundColor: 'gray'
+                backgroundColor: theme.colors.background
             },
-            headerTintColor: 'blue'
+            headerTintColor: theme.colors.primary
         })
     }
+}, {
+    defaultNavigationOptions: {
+        headerBackTitleVisible: false
+    },
 });

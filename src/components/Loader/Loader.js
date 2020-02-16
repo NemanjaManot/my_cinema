@@ -1,19 +1,24 @@
 import React from "react";
-import { View } from "react-native";
-import { ActivityIndicator } from "react-native-paper";
+import { View, Modal } from "react-native";
+import { ActivityIndicator } from "react-native-paper"
 /* Styles */
-const container = {
-    flex: 1,
-    backgroundColor: 'white',
-    alignItems: 'center',
-    justifyContent: 'center'
-};
+import { styles } from "./loaderStyle";
 
-const Loader = () => {
+const { modalBackground, activityIndicatorWrapper } = styles;
+
+const Loader = ({ isLoading }) => {
     return (
-        <View style={ container }>
-            <ActivityIndicator/>
-        </View>
+        <Modal
+            transparent={ true }
+            animationType={ 'none' }
+            visible={ isLoading }
+        >
+            <View style={ modalBackground }>
+                <View style={ activityIndicatorWrapper }>
+                    <ActivityIndicator animating={ isLoading }/>
+                </View>
+            </View>
+        </Modal>
     );
 };
 
