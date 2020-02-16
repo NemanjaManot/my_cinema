@@ -1,8 +1,12 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, ScrollView } from "react-native";
 import { Button } from "react-native-paper";
 /* Services */
 import AsyncStorageService from "../../../services/asyncStorageService";
+/* Style */
+import { styles } from "../mainStyle";
+
+const { logoutButtonStyle } = styles;
 
 const UserProfile = ({ navigation }) => {
     const onLogout = async () => {
@@ -10,16 +14,27 @@ const UserProfile = ({ navigation }) => {
         await AsyncStorageService.logoutUser();
     };
 
-    return (
-        <View style={ { flex: 1 } }>
-            <Text>User Profile screen</Text>
-
+    const renderLogoutButton = () => {
+        return (
             <Button
                 mode="contained"
                 onPress={ onLogout }
+                style={ logoutButtonStyle }
+                size={ 100 }
             >
                 Log out
             </Button>
+        )
+    };
+
+    return (
+        <View style={ { flex: 1 } }>
+            <ScrollView bounces={ false }>
+                <View style={ { flex: 1 } }>
+                    <Text>User Profile screen</Text>
+                </View>
+            </ScrollView>
+            { renderLogoutButton() }
         </View>
     )
 };

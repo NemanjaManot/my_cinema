@@ -9,7 +9,7 @@ import { styles } from "../mainStyle";
 /* Theme */
 import { theme } from "../../../assets/theme";
 
-const { profileHeaderStyle } = styles;
+const { profileHeaderStyle, buttonsContainer } = styles;
 
 const Movies = ({ navigation, MovieStore }) => {
     const [isNowPlaying, setIsNowPlaying] = useState(true);
@@ -51,16 +51,30 @@ const Movies = ({ navigation, MovieStore }) => {
         setIsNowPlaying(false)
     };
 
-    return (
-        <ScrollView style={ { flex: 1 } }>
-            <View style={ { flexDirection: 'row', justifyContent: 'space-around' } }>
-                <Button mode={ isNowPlaying ? "contained" : "outlined" } onPress={ onNowPlayingPress }>
+    const renderHeaderButtons = () => {
+        return (
+            <View style={ buttonsContainer }>
+                <Button
+                    style={ { flex: 1 } }
+                    mode={ isNowPlaying ? "contained" : "outlined" }
+                    onPress={ onNowPlayingPress }
+                >
                     Now playing
                 </Button>
-                <Button mode={ !isNowPlaying ? "contained" : "outlined" } onPress={ onUpcomingPress }>
+                <Button
+                    style={ { flex: 1 } }
+                    mode={ !isNowPlaying ? "contained" : "outlined" }
+                    onPress={ onUpcomingPress }
+                >
                     Upcoming
                 </Button>
             </View>
+        )
+    };
+
+    return (
+        <ScrollView bounces={ false } style={ { flex: 1 } }>
+            { renderHeaderButtons() }
             { movies.map(movie => renderMovie(movie)) }
         </ScrollView>
     )
