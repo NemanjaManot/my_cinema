@@ -7,5 +7,9 @@ export const styles = StyleSheet.create({
         width: '100%',
         height: 60,
         justifyContent: 'center'
+    },
+    contentWrapper: {
+        flex: 1,
+        padding: 10
     }
 });
