@@ -4,6 +4,8 @@ import { toJS } from "mobx";
 import { observer, inject } from "mobx-react";
 import { Card, Button } from "react-native-paper";
 import MaterialIcon from "react-native-vector-icons/MaterialIcons";
+/* Components */
+import Loader from "../../../components/Loader/Loader";
 /* Styles */
 import { styles } from "../mainStyle";
 /* Theme */
@@ -74,6 +76,7 @@ const Movies = ({ navigation, MovieStore }) => {
 
     return (
         <View style={ { flex: 1 } }>
+            <Loader isLoading={ isLoading }/>
             { renderHeaderButtons() }
             { movies && <FlatList
                 data={ movies }

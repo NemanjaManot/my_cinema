@@ -1,8 +1,15 @@
 import React, { useEffect } from "react";
-/* Components */
-import Loader from "../../components/Loader/Loader";
+import { ActivityIndicator } from "react-native-paper";
+import { View } from "react-native";
 /* Services */
 import AsyncStorageService from "../../services/asyncStorageService";
+/* Styles */
+const container = {
+    flex: 1,
+    backgroundColor: 'white',
+    alignItems: 'center',
+    justifyContent: 'center'
+};
 
 const InitialLoading = ({ navigation }) => {
     useEffect(() => {
@@ -18,7 +25,9 @@ const InitialLoading = ({ navigation }) => {
         }
     };
 
-    return <Loader/>;
+    return <View style={ container }>
+        <ActivityIndicator/>
+    </View>
 };
 
 export default InitialLoading;
