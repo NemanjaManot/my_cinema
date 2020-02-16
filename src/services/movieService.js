@@ -26,7 +26,7 @@ class MovieService {
 
     async getSingle(id) {
         try {
-            const response = await axios.get(`${ BASE_URL }/${ id }?${ API_KEY }`);
+            const response = await axios.get(`${ BASE_URL }/${ id }?${ API_KEY }&append_to_response=videos`);
             return response.data;
         } catch (error) {
             return error;

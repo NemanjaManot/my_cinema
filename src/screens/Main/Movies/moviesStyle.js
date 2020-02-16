@@ -29,5 +29,12 @@ export const styles = StyleSheet.create({
     itemFooter: {
         flexDirection: 'row',
         justifyContent: 'space-between'
-    }
+    },
+    profileHeaderStyle: {
+        marginRight: 15
+    },
+    buttonsContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-around'
+    },
 });

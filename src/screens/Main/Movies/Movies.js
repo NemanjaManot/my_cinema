@@ -8,7 +8,7 @@ import MaterialIcon from "react-native-vector-icons/MaterialIcons";
 import Loader from "../../../components/Loader/Loader";
 import MovieListItem from "./MovieListItem";
 /* Styles */
-import { styles } from "../mainStyle";
+import { styles } from "./moviesStyle";
 /* Theme */
 import { theme } from "../../../assets/theme";
 
