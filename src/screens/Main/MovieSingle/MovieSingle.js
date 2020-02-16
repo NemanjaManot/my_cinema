@@ -13,4 +13,8 @@ const MovieSingle = ({ MovieStore }) => {
     )
 };
 
+MovieSingle.navigationOptions = ({ navigation }) => ({
+    title: navigation.getParam('title')
+});
+
 export default inject("MovieStore")(observer(MovieSingle));

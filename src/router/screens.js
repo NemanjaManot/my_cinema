@@ -39,7 +39,10 @@ export const MainScreen = createStackNavigator({
             headerStyle: {
                 backgroundColor: theme.colors.background
             },
-            headerTintColor: theme.colors.primary
+            headerTintColor: theme.colors.primary,
+            headerTitleStyle: {
+                marginHorizontal: 45
+            }
         })
     },
     UserProfile: {

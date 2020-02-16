@@ -22,13 +22,13 @@ const Movies = ({ navigation, MovieStore }) => {
 
     const { movies, isLoading } = toJS(MovieStore);
 
-    const onMoviePress = async (id) => {
+    const onMoviePress = async (id, title) => {
         await MovieStore.getSingleMovie(id);
-        await navigation.navigate("MovieSingle");
+        await navigation.navigate("MovieSingle", { title: title });
     };
 
     const renderItemMovie = ({ item }) => {
-        return <MovieListItem item={ item } onPress={ onMoviePress.bind(this, item.id) }/>;
+        return <MovieListItem item={ item } onPress={ onMoviePress.bind(this, item.id, item.title) }/>;
     };
 
     const onNowPlayingPress = () => {
