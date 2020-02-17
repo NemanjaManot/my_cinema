@@ -2,7 +2,6 @@ import React from "react";
 import { ScrollView, View, Text, Image } from "react-native";
 import PropTypes from "prop-types";
 import { inject, observer } from "mobx-react";
-import { toJS } from "mobx";
 import { WebView } from 'react-native-webview';
 import MaterialIcon from "react-native-vector-icons/MaterialIcons";
 import { Title, Chip, Subheading, Paragraph } from "react-native-paper";
@@ -13,6 +12,8 @@ import { globalStyles } from "../../../assets/globalStyles";
 import { theme } from "../../../assets/theme";
 /* Custom Types */
 import customTypes from "../../../utils/customTypes";
+/* Config */
+import { config } from "../../../utils/config";
 
 const {
     trailerWrapper,
@@ -29,13 +30,14 @@ const {
     imageWrapper
 } = styles;
 const { shadow } = globalStyles;
+const { youtubeUrl, imageUrl } = config;
 
 const MovieSingle = ({ MovieStore }) => {
-    const { singleMovie, isLoading } = toJS(MovieStore);
+    const { singleMovie } = MovieStore;
 
     const renderHeader = () => {
         const { poster_path, title, release_date, status, vote_average } = singleMovie;
-        const imageUri = `https://image.tmdb.org/t/p/w500/${ poster_path }`;
+        const imageUri = `${ imageUrl }/${ poster_path }`;
         return (
             <View style={ [header, shadow] }>
                 <View style={ imageWrapper }>
@@ -84,7 +86,7 @@ const MovieSingle = ({ MovieStore }) => {
             <WebView
                 javaScriptEnabled
                 domStorageEnabled
-                source={ { uri: `https://www.youtube.com/embed/${ key }` } }
+                source={ { uri: `${ youtubeUrl }/${ key }` } }
             />
         </View>;
     };
@@ -101,7 +103,6 @@ const MovieSingle = ({ MovieStore }) => {
             </View>
         )
     };
-    console.log('singlemovie', singleMovie)
 
     return (
         <ScrollView bounces={ false } style={ { flex: 1 } }>

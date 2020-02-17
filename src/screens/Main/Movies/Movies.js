@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { TouchableOpacity, FlatList, View } from "react-native";
 import PropTypes from "prop-types"
-import { toJS } from "mobx";
 import { observer, inject } from "mobx-react";
 import { Button } from "react-native-paper";
 import MaterialIcon from "react-native-vector-icons/MaterialIcons";
@@ -22,7 +21,7 @@ const Movies = ({ navigation, MovieStore }) => {
     useEffect(() => {
         MovieStore.getNowPlayingMovies();
     }, [MovieStore]);
-    const { movies, isLoading } = toJS(MovieStore);
+    const { movies, isLoading } = MovieStore;
 
     const onMoviePress = async (id, title) => {
         await MovieStore.getSingleMovie(id);
