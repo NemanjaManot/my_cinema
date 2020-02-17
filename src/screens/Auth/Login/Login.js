@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { View, TouchableOpacity, Image, KeyboardAvoidingView } from "react-native";
+import { View, TouchableOpacity, Image, KeyboardAvoidingView, ScrollView } from "react-native";
 import PropTypes from "prop-types";
 import { Button, TextInput, HelperText, Text } from "react-native-paper";
 /* Styles */
 import { styles } from "../authStyle";
+import { isAndroid } from "../../../assets/globalStyles";
 /* Images */
 import { logoImage } from "../../../assets/images";
 /* Services */
@@ -42,48 +43,50 @@ const Login = ({ navigation }) => {
     };
 
     return (
-        <KeyboardAvoidingView style={ container } behavior="padding" enabled>
-            <View style={ imageWrapper }>
-                <Image source={ logoImage }/>
-            </View>
-            <View style={ inputStyle }>
-                <TextInput
-                    label="Email"
-                    value={ email }
-                    onChangeText={ onChangeEmail }
-                    autoCapitalize="none"
-                    style={ textInputStyle }
-                />
-            </View>
-            <View style={ inputStyle }>
-                <TextInput
-                    label="Password"
-                    value={ password }
-                    onChangeText={ onChangePassword }
-                    secureTextEntry
-                    autoCapitalize="none"
-                    style={ textInputStyle }
-                />
-            </View>
+        <KeyboardAvoidingView behavior={ isAndroid ? "height" : "padding" } style={ { flex: 1 } }>
+            <ScrollView contentContainerStyle={ container }>
+                <View style={ imageWrapper }>
+                    <Image source={ logoImage }/>
+                </View>
+                <View style={ inputStyle }>
+                    <TextInput
+                        label="Email"
+                        value={ email }
+                        onChangeText={ onChangeEmail }
+                        autoCapitalize="none"
+                        style={ textInputStyle }
+                    />
+                </View>
+                <View style={ inputStyle }>
+                    <TextInput
+                        label="Password"
+                        value={ password }
+                        onChangeText={ onChangePassword }
+                        secureTextEntry
+                        autoCapitalize="none"
+                        style={ textInputStyle }
+                    />
+                </View>
 
-            <HelperText type="error" visible={ error }>
-                Something went wrong, try again
-            </HelperText>
+                <HelperText type="error" visible={ error }>
+                    Something went wrong, try again
+                </HelperText>
 
-            <Button
-                contentStyle={ loginButton }
-                mode="contained"
-                onPress={ tryLogin }
-            >
-                Login
-            </Button>
+                <Button
+                    contentStyle={ loginButton }
+                    mode="contained"
+                    onPress={ tryLogin }
+                >
+                    Login
+                </Button>
 
-            <View style={ registerButtonContainer }>
-                <Text>Don't have account?</Text>
-                <TouchableOpacity onPress={ navigateToRegister }>
-                    <Text style={ registerText }>Register here</Text>
-                </TouchableOpacity>
-            </View>
+                <View style={ registerButtonContainer }>
+                    <Text>Don't have account?</Text>
+                    <TouchableOpacity onPress={ navigateToRegister }>
+                        <Text style={ registerText }>Register here</Text>
+                    </TouchableOpacity>
+                </View>
+            </ScrollView>
         </KeyboardAvoidingView>
     )
 };

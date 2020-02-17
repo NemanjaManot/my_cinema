@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { View, KeyboardAvoidingView, TouchableOpacity } from "react-native";
+import { View, KeyboardAvoidingView, TouchableOpacity, ScrollView } from "react-native";
 import PropTypes from "prop-types";
 import { Button, TextInput, HelperText } from "react-native-paper";
 import MaterialIcon from "react-native-vector-icons/MaterialIcons";
 /* Styles */
 import { styles } from "../authStyle";
+import { isAndroid } from "../../../assets/globalStyles";
 /* Services */
 import AsyncStorageService from "../../../services/asyncStorageService";
 /* Regex */
@@ -59,12 +60,12 @@ const Registration = ({ navigation }) => {
     const backToLogin = () => navigation.navigate("Login");
 
     return (
-        <KeyboardAvoidingView style={ { flex: 1 } } behavior="padding" enabled>
+        <KeyboardAvoidingView behavior={ isAndroid ? "height" : "padding" } style={ { flex: 1 } }>
             <TouchableOpacity style={ backToLoginStyle } onPress={ backToLogin }>
                 <MaterialIcon name="arrow-back" size={ 40 } color={ theme.colors.primary }/>
             </TouchableOpacity>
 
-            <View style={ container }>
+            <ScrollView contentContainerStyle={ container }>
                 <View style={ inputStyle }>
                     <TextInput
                         label="Set Full Name"
@@ -103,7 +104,7 @@ const Registration = ({ navigation }) => {
                 >
                     Register
                 </Button>
-            </View>
+            </ScrollView>
         </KeyboardAvoidingView>
     )
 };
