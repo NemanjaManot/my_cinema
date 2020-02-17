@@ -9,13 +9,16 @@ import { styles } from "./moviesStyle";
 import { globalStyles } from "../../../assets/globalStyles";
 /* Custom Types */
 import customTypes from "../../../utils/customTypes";
+/* Config */
+import { config } from "../../../utils/config";
 
 const { movieWrapper, contentMovieWrapper, imageStyle, itemFooter } = styles;
 const { shadow } = globalStyles;
+const { imageUrl } = config;
 
 const MovieListItem = ({ item, onPress }) => {
     const { title, release_date, poster_path, vote_average } = item;
-    const imageUri = `https://image.tmdb.org/t/p/w500/${ poster_path }`;
+    const imageUri = `${ imageUrl }/${ poster_path }`;
     return (
         <TouchableWithoutFeedback onPress={ onPress }>
             <View style={ [movieWrapper, shadow] }>

@@ -1,13 +1,13 @@
 import axios from "axios";
+import { config } from "../utils/config";
 
-const API_KEY = "api_key=42599a966bcf1e9b59d33cce12b02ec8";
-const BASE_URL = "https://api.themoviedb.org/3/movie";
+const { apiKey, baseUrl } = config;
 
 class MovieService {
     async getNowPlaying() {
         try {
             const response = await axios.get(
-                `${ BASE_URL }/now_playing?${ API_KEY }`
+                `${ baseUrl }/now_playing?${ apiKey }`
             );
             return response.data;
         } catch (error) {
@@ -17,7 +17,7 @@ class MovieService {
 
     async getUpcoming() {
         try {
-            const response = await axios.get(`${ BASE_URL }/upcoming?${ API_KEY }`);
+            const response = await axios.get(`${ baseUrl }/upcoming?${ apiKey }`);
             return response.data;
         } catch (error) {
             return error;
@@ -26,7 +26,7 @@ class MovieService {
 
     async getSingle(id) {
         try {
-            const response = await axios.get(`${ BASE_URL }/${ id }?${ API_KEY }&append_to_response=videos`);
+            const response = await axios.get(`${ baseUrl }/${ id }?${ apiKey }&append_to_response=videos`);
             return response.data;
         } catch (error) {
             return error;
