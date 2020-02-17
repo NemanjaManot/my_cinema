@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { Platform, StyleSheet } from "react-native";
 import { theme } from "./theme";
 
 export const globalStyles = StyleSheet.create({
@@ -13,3 +13,5 @@ export const globalStyles = StyleSheet.create({
         elevation: 5,
     }
 });
+
+export const isAndroid = Platform.OS === "android";
