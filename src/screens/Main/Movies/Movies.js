@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { TouchableOpacity, FlatList, View } from "react-native";
+import PropTypes from "prop-types"
 import { toJS } from "mobx";
 import { observer, inject } from "mobx-react";
 import { Button } from "react-native-paper";
@@ -11,6 +12,8 @@ import MovieListItem from "./MovieListItem";
 import { styles } from "./moviesStyle";
 /* Theme */
 import { theme } from "../../../assets/theme";
+/* Custom Types */
+import customTypes from "../../../utils/customTypes";
 
 const { profileHeaderStyle, buttonsContainer } = styles;
 
@@ -19,7 +22,6 @@ const Movies = ({ navigation, MovieStore }) => {
     useEffect(() => {
         MovieStore.getNowPlayingMovies();
     }, [MovieStore]);
-
     const { movies, isLoading } = toJS(MovieStore);
 
     const onMoviePress = async (id, title) => {
@@ -85,5 +87,18 @@ Movies.navigationOptions = ({ navigation }) => ({
         </TouchableOpacity>
     )
 });
+
+Movies.propTypes = {
+    MovieStore: PropTypes.shape(
+        {
+            movies: customTypes.movies,
+            isLoading: PropTypes.bool.isRequired,
+            getNowPlayingMovies: PropTypes.func.isRequired,
+            getSingleMovie: PropTypes.func.isRequired,
+            getUpcomingMovies: PropTypes.func.isRequired
+        }
+    ),
+    navigation: PropTypes.object.isRequired
+};
 
 export default inject("MovieStore")(observer(Movies));

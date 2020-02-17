@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { View, TouchableOpacity, Image, KeyboardAvoidingView } from "react-native";
+import PropTypes from "prop-types";
 import { Button, TextInput, HelperText, Text } from "react-native-paper";
 /* Styles */
 import { styles } from "../authStyle";
@@ -7,10 +8,16 @@ import { styles } from "../authStyle";
 import { logoImage } from "../../../assets/images";
 /* Services */
 import AsyncStorageService from "../../../services/asyncStorageService";
-/* Theme */
-import { theme } from "../../../assets/theme";
 
-const { textInputStyle, loginButton, inputStyle, container, registerButtonContainer, imageWrapper } = styles;
+const {
+    textInputStyle,
+    loginButton,
+    inputStyle,
+    container,
+    registerButtonContainer,
+    imageWrapper,
+    registerText
+} = styles;
 
 const Login = ({ navigation }) => {
     const [email, setEmail] = useState('');
@@ -74,11 +81,15 @@ const Login = ({ navigation }) => {
             <View style={ registerButtonContainer }>
                 <Text>Don't have account?</Text>
                 <TouchableOpacity onPress={ navigateToRegister }>
-                    <Text style={ { color: theme.colors.primary, fontWeight: 'bold' } }>Register here</Text>
+                    <Text style={ registerText }>Register here</Text>
                 </TouchableOpacity>
             </View>
         </KeyboardAvoidingView>
     )
+};
+
+Login.propTypes = {
+    navigation: PropTypes.object.isRequired
 };
 
 export default Login;

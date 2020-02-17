@@ -1,11 +1,14 @@
 import React from "react";
 import { Image, Text, TouchableWithoutFeedback, View } from "react-native";
+import PropTypes from "prop-types";
 import { Subheading, Title } from "react-native-paper";
 /* Theme */
 import { theme } from "../../../assets/theme";
 /* Styles */
 import { styles } from "./moviesStyle";
 import { globalStyles } from "../../../assets/globalStyles";
+/* Custom Types */
+import customTypes from "../../../utils/customTypes";
 
 const { movieWrapper, contentMovieWrapper, imageStyle, itemFooter } = styles;
 const { shadow } = globalStyles;
@@ -32,4 +35,9 @@ const MovieListItem = ({ item, onPress }) => {
     )
 };
 
-export default MovieListItem
+MovieListItem.propTypes = {
+    item: customTypes.movie.isRequired,
+    onPress: PropTypes.func.isRequired
+};
+
+export default MovieListItem;

@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Modal } from "react-native";
+import PropTypes from "prop-types";
 import { ActivityIndicator } from "react-native-paper"
 /* Styles */
 import { styles } from "./loaderStyle";
@@ -20,6 +21,10 @@ const Loader = ({ isLoading }) => {
             </View>
         </Modal>
     );
+};
+
+Loader.propTypes = {
+    isLoading: PropTypes.bool.isRequired
 };
 
 export default Loader;
