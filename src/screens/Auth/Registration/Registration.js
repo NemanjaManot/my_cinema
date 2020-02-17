@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, KeyboardAvoidingView, TouchableOpacity } from "react-native";
+import PropTypes from "prop-types";
 import { Button, TextInput, HelperText } from "react-native-paper";
 import MaterialIcon from "react-native-vector-icons/MaterialIcons";
 /* Styles */
@@ -11,7 +12,7 @@ import { EMAIL_VALIDATION_REGEX } from "../../../utils/regex";
 /* Theme */
 import { theme } from "../../../assets/theme";
 
-const { textInputStyle, loginButton, inputStyle, container, backToLoginStyle } = styles;
+const { textInputStyle, loginButton, inputStyle, container, backToLoginStyle, errorTextStyle } = styles;
 
 const Registration = ({ navigation }) => {
     const [registeredUsers, setRegisteredUsers] = useState([]);
@@ -26,7 +27,7 @@ const Registration = ({ navigation }) => {
 
     useEffect(() => {
         getUsers();
-        //AsyncStorageService.clearWholeStorage();
+        //AsyncStorageService.clearWholeStorage();  // for testing
     }, []);
 
     const getUsers = async () => {
@@ -92,7 +93,7 @@ const Registration = ({ navigation }) => {
                         style={ textInputStyle }
                     />
                 </View>
-                <HelperText style={ { marginVertical: 10 } } type="error" visible={ error }>
+                <HelperText style={ errorTextStyle } type="error" visible={ error }>
                     Something went wrong, try again
                 </HelperText>
                 <Button
@@ -105,6 +106,10 @@ const Registration = ({ navigation }) => {
             </View>
         </KeyboardAvoidingView>
     )
+};
+
+Registration.propTypes = {
+    navigation: PropTypes.object.isRequired
 };
 
 export default Registration;

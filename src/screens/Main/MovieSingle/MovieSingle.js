@@ -1,5 +1,6 @@
 import React from "react";
 import { ScrollView, View, Text, Image } from "react-native";
+import PropTypes from "prop-types";
 import { inject, observer } from "mobx-react";
 import { toJS } from "mobx";
 import { WebView } from 'react-native-webview';
@@ -10,6 +11,8 @@ import { styles } from "./movieSingleStyle";
 import { globalStyles } from "../../../assets/globalStyles";
 /* Theme */
 import { theme } from "../../../assets/theme";
+/* Custom Types */
+import customTypes from "../../../utils/customTypes";
 
 const {
     trailerWrapper,
@@ -98,6 +101,7 @@ const MovieSingle = ({ MovieStore }) => {
             </View>
         )
     };
+    console.log('singlemovie', singleMovie)
 
     return (
         <ScrollView bounces={ false } style={ { flex: 1 } }>
@@ -115,5 +119,14 @@ const MovieSingle = ({ MovieStore }) => {
 MovieSingle.navigationOptions = ({ navigation }) => ({
     title: navigation.getParam('title')
 });
+
+MovieSingle.propTypes = {
+    MovieStore: PropTypes.shape(
+        {
+            singleMovie: customTypes.movie.isRequired,
+            isLoading: PropTypes.bool.isRequired,
+        }
+    )
+};
 
 export default inject("MovieStore")(observer(MovieSingle));

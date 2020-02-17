@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, ScrollView } from "react-native";
+import PropTypes from "prop-types";
 import { Title, List, Button } from "react-native-paper";
 /* Services */
 import AsyncStorageService from "../../../services/asyncStorageService";
@@ -72,6 +73,10 @@ const UserProfile = ({ navigation }) => {
             { renderLogoutButton() }
         </View>
     )
+};
+
+UserProfile.propTypes = {
+    navigation: PropTypes.object.isRequired
 };
 
 export default UserProfile;

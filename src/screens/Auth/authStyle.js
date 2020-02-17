@@ -1,4 +1,6 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native";
+/* Theme */
+import { theme } from "../../assets/theme";
 
 export const styles = StyleSheet.create({
     container: {
@@ -26,5 +28,12 @@ export const styles = StyleSheet.create({
     },
     imageWrapper: {
         alignItems: 'center'
+    },
+    registerText: {
+        color: theme.colors.primary,
+        fontWeight: 'bold'
+    },
+    errorTextStyle: {
+        marginVertical: 10
     }
 });
